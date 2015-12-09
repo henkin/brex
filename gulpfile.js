@@ -9,7 +9,7 @@ var config = {
 	publicDir: 'public',
 };
 
-gulp.task('css', function() {
+gulp.task('sass', function() {
 	return gulp.src('src/styles/main.scss')
 			.pipe(sass({
 				includePaths: [config.bootstrapDir + '/assets/stylesheets'],
@@ -22,10 +22,21 @@ gulp.task('fonts', function() {
 			.pipe(gulp.dest(config.publicDir + '/fonts'));
 });
 
-gulp.task('sass', function(){
-	return gulp.src('src/styles/main.scss')
-			.pipe(sass().on('error', sass.logError))
-			.pipe(gulp.dest('public/stylesheets'))
+gulp.task('js', () => {
+	return gulp.src('app/**/*.js')
+			.pipe(sourcemaps.init())
+			.pipe(babel({
+				presets: ['es2015', 'react']
+			}))
+			.pipe(concat('bundle.js'))
+			.pipe(sourcemaps.write('.'))
+			.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('default', ['css', 'fonts']);
+gulp.task("watch", function() {
+	// calls "build-js" whenever anything changes
+	gulp.watch("public/js/**/*.js", ["js"]);
+	//gulp.watch('sass')
+});
+
+gulp.task('default', ['js', 'sass', 'fonts']);
