@@ -18,7 +18,7 @@ function compile(watch) {
 				.pipe(buffer())
 				.pipe(sourcemaps.init({ loadMaps: true }))
 				.pipe(sourcemaps.write('./'))
-				.pipe(gulp.dest('./public'));
+				.pipe(gulp.dest('./build'));
 	}
 
 	if (watch) {
