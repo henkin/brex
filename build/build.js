@@ -19082,13 +19082,32 @@ module.exports = require('./lib/React');
 },{"./lib/React":53}],159:[function(require,module,exports){
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
+
+var _main = require('./main');
+
+var _main2 = _interopRequireDefault(_main);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _reactDom.render)(_react2.default.createElement(_main2.default, null), document.getElementById('example'));
+
+},{"./main":160,"react":158,"react-dom":29}],160:[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19097,8 +19116,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//import Main from './main';
 
 var Title = (function (_React$Component) {
     _inherits(Title, _React$Component);
@@ -19113,13 +19130,13 @@ var Title = (function (_React$Component) {
     }
 
     _createClass(Title, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                { className: 'title' },
+                "div",
+                { className: "title" },
                 _react2.default.createElement(
-                    'span',
+                    "span",
                     null,
                     this.props.foo
                 )
@@ -19140,16 +19157,16 @@ var Main = (function (_React$Component2) {
     }
 
     _createClass(Main, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
-                _react2.default.createElement(Title, { foo: 'to the top with you!' }),
+                _react2.default.createElement(Title, { foo: "to the top with you!" }),
                 _react2.default.createElement(
-                    'p',
+                    "p",
                     null,
-                    'Major Content'
+                    "Major Content"
                 )
             );
         }
@@ -19158,9 +19175,9 @@ var Main = (function (_React$Component2) {
     return Main;
 })(_react2.default.Component);
 
-(0, _reactDom.render)(_react2.default.createElement(Main, null), document.getElementById('example'));
+exports.default = Main;
 
-},{"react":158,"react-dom":29}]},{},[159])
+},{"react":158}]},{},[159])
 
 
 //# sourceMappingURL=build.js.map

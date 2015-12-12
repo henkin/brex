@@ -41,8 +41,12 @@ var config = {
 	publicDir: 'public',
 };
 
+var sassFile = 'src/styles/main.scss';
+var fontFiles = config.bootstrapDir + '/assets/fonts/**/*';
+
 gulp.task('sass', function() {
-	return gulp.src('src/styles/main.scss')
+
+    return gulp.src(sassFile)
 			.pipe(sass({
 				includePaths: [config.bootstrapDir + '/assets/stylesheets'],
 			}).on('error', sass.logError))
@@ -50,14 +54,17 @@ gulp.task('sass', function() {
 });
 
 gulp.task('fonts', function() {
-	return gulp.src(config.bootstrapDir + '/assets/fonts/**/*')
+    return gulp.src(fontFiles)
 			.pipe(gulp.dest(config.publicDir + '/fonts'));
 });
 
 gulp.task('build', function() { return compile(); });
 gulp.task('watch', function() { return watch(); });
-
-gulp.task('default', ['watch', 'sass', 'fonts']);
+gulp.task('watch-styles', function() {
+	gulp.watch(sassFile, ['sass']);
+	gulp.watch(fontFiles, ['fonts']);
+})
+gulp.task('default', ['watch-styles', 'watch']);
 
 
 //gulp.task('js', () => {
