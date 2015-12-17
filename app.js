@@ -5,10 +5,13 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-
+let passport = require('passport');
+let passportConfig = require('./configuredPassport')(passport);
+let util = require('util');
+let session = require('express-session');
 let routes = require('./routes/index');
 let users = require('./routes/users');
-
+let auth = require('./routes/auth');
 var app = express();
 
 // view engine setup
@@ -21,12 +24,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    secret: 'totally neet',
+    resave: true,
+    saveUninitialized: true
+}));
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use('/build',  express.static(__dirname + '/build'));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,6 +72,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
 
 
 module.exports = app;

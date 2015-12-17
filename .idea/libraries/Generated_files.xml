@@ -25,6 +25,7 @@
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/EventPluginUtils-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react-mixin/node_modules/object-assign/index-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/EventPropagators-compiled.js" />
+        <item url="file://$PROJECT_DIR$/routes/index-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/Danger-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/LinkedStateMixin-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react-mixin/index-compiled.js" />
@@ -32,6 +33,7 @@
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/adler32-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactDOMTextarea-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/update-compiled.js" />
+        <item url="file://$PROJECT_DIR$/config/default-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/LinkedValueUtils-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactDOM-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactInstanceMap-compiled.js" />
@@ -64,11 +66,12 @@
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/MetaMatchers-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/Transaction-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactVersion-compiled.js" />
+        <item url="file://$PROJECT_DIR$/routes/auth-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactElement-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/setInnerHTML-compiled.js" />
+        <item url="file://$PROJECT_DIR$/configuredPassport-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/getIteratorFn-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/Object.assign-compiled.js" />
-        <item url="file://$PROJECT_DIR$/public/js/main-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/CallbackQueue-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactChildren-compiled.js" />
         <item url="file://$PROJECT_DIR$/node_modules/react/lib/ReactUpdates-compiled.js" />
@@ -97,6 +100,8 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/public/js/main-compiled.js" />
+      <root url="file://$PROJECT_DIR$/configuredPassport-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/ua-parser-js/package-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/TapEventPlugin-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/flattenChildren-compiled.js" />
@@ -120,6 +125,7 @@
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/EventPluginUtils-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react-mixin/node_modules/object-assign/index-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/EventPropagators-compiled.js" />
+      <root url="file://$PROJECT_DIR$/routes/index-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/Danger-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/LinkedStateMixin-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react-mixin/index-compiled.js" />
@@ -127,6 +133,7 @@
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/adler32-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactDOMTextarea-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/update-compiled.js" />
+      <root url="file://$PROJECT_DIR$/config/default-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/LinkedValueUtils-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactDOM-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactInstanceMap-compiled.js" />
@@ -159,11 +166,12 @@
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/MetaMatchers-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/Transaction-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactVersion-compiled.js" />
+      <root url="file://$PROJECT_DIR$/routes/auth-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactElement-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/setInnerHTML-compiled.js" />
+      <root url="file://$PROJECT_DIR$/configuredPassport-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/getIteratorFn-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/Object.assign-compiled.js" />
-      <root url="file://$PROJECT_DIR$/public/js/main-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/CallbackQueue-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactChildren-compiled.js" />
       <root url="file://$PROJECT_DIR$/node_modules/react/lib/ReactUpdates-compiled.js" />
