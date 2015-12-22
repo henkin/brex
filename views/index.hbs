@@ -3,11 +3,14 @@
         <nav>
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="#">Home</a></li>
-                <!--<li role="presentation"><a href="#">About</a></li>-->
-                <li role="presentation"><a href="/auth/google">Login</a></li>
+                {{#if user}}
+                    <li role="presentation"><a href="/auth/logout">{{{user.displayName}}}</a></li>
+                {{else}}
+                    <li role="presentation"><a href="/auth/google">Login</a></li>
+                {{/if}}
             </ul>
         </nav>
-        <h3 class="text-muted">{{{user}}}</h3>
+        <h3 class="text-muted">Application</h3>
     </div>
 
     <div class="jumbotron">
@@ -22,7 +25,7 @@
     <div class="row marketing">
         <div class="col-lg-6">
             <p>
-            <div id="example"/>
+                <div id="example"/>
             </p>
         </div>
     </div>
