@@ -4,7 +4,7 @@
             <ul class="nav nav-pills pull-right">
                 <li role="presentation" class="active"><a href="#">Home</a></li>
                 {{#if user}}
-                    <li role="presentation"><a href="/auth/logout">{{{user.displayName}}}</a></li>
+                    <li role="presentation"><a href="/auth/logout">{{{user.name}}}</a></li>
                 {{else}}
                     <li role="presentation"><a href="/auth/google">Login</a></li>
                 {{/if}}

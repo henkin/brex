@@ -4,9 +4,10 @@ var r = require('../db');
 function loginCallbackHandler (objectMapper, type) {
     return function (accessToken, refreshToken, profile, done) {
         if (accessToken !== null) {
+            console.log(profile);
             r
                 .table('users')
-                .getAll(profile.username, { index: 'login' })
+                .getAll(profile.id, { index: 'login' })
                 .filter({ type: type })
                 .run(r.conn)
                 .then(function (cursor) {
@@ -29,7 +30,7 @@ function loginCallbackHandler (objectMapper, type) {
                         });
                 })
                 .catch(function (err) {
-                    console.log('Error Getting User', err);
+                    console.error('Error Getting User', err);
                 });
         }
     };
@@ -38,19 +39,19 @@ function loginCallbackHandler (objectMapper, type) {
 
 
 module.exports = function(passport) {
-    //passport.serializeUser(function (user, done) {
-    //    return done(null, user.id);
-    //});
-    //
-    //passport.deserializeUser(function (id, done) {
-    //    r
-    //        .table('users')
-    //        .get(id)
-    //        .run(r.conn)
-    //        .then(function (user) {
-    //            done(null, user);
-    //        });
-    //});
+    passport.serializeUser(function (user, done) {
+        return done(null, user.id);
+    });
+
+    passport.deserializeUser(function (id, done) {
+        r
+            .table('users')
+            .get(id)
+            .run(r.conn)
+            .then(function (user) {
+                done(null, user);
+            });
+    });
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -59,13 +60,13 @@ module.exports = function(passport) {
 //   the user by ID when deserializing.  However, since this example does not
 //   have a database of user records, the complete Google profile is
 //   serialized and deserialized.
-    passport.serializeUser(function (user, done) {
-        done(null, user);
-    });
-
-    passport.deserializeUser(function (obj, done) {
-        done(null, obj);
-    });
+//    passport.serializeUser(function (user, done) {
+//        done(null, user);
+//    });
+//
+//    passport.deserializeUser(function (obj, done) {
+//        done(null, obj);
+//    });
 
 
 // Use the GoogleStrategy within Passport.
@@ -80,17 +81,25 @@ module.exports = function(passport) {
             clientSecret: config.get('google').clientSecret,
             callbackURL: "http://localhost:3000/auth/google/callback"
         },
-        //loginCallbackHandler
-        function (accesstoken, refreshtoken, profile, done) {
-            // asynchronous verification, for effect...
-            process.nextTick(function () {
-                console.info('profile: ', profile)
-                // to keep the example simple, the user's google profile is returned to
-                // represent the logged-in user.  in a typical application, you would want
-                // to associate the google account with a user record in your database,
-                // and return that user instead.
-                return done(null, profile);
-            });
-        }
+        loginCallbackHandler(function (profile) {
+            return {
+                'login': profile.id,
+                'name': profile.displayName || null,
+                'url': profile._json.url,
+                'avatarUrl': profile._json.image.url,
+                'type': 'google'
+            };
+        }, 'google')
+        //function (accesstoken, refreshtoken, profile, done) {
+        //    // asynchronous verification, for effect...
+        //    process.nextTick(function () {
+        //        console.info('profile: ', profile)
+        //        // to keep the example simple, the user's google profile is returned to
+        //        // represent the logged-in user.  in a typical application, you would want
+        //        // to associate the google account with a user record in your database,
+        //        // and return that user instead.
+        //        return done(null, profile);
+        //    });
+        //}
     ));
 };
