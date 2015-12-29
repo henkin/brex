@@ -1,38 +1,43 @@
+"use strict";
+
 var config = require('config');
 var r = require('../db');
 
+function getOrCreateUser(profile, objectMapper, type, done) {
+    console.log(profile);
+
+    r.table('users')
+    .getAll(profile.id, { index: 'login' })
+    .filter({ type: type })
+    .run(r.conn)
+    .then(function (cursor) {
+        return cursor.toArray()
+            .then(function (users) {
+                if (users.length > 0) {
+                    return done(null, users[0]);
+                }
+                return r.table('users')
+                    .insert(objectMapper(profile))
+                    .run(r.conn)
+                    .then(function (response) {
+                        return r.table('users')
+                            .get(response.generated_keys[0])
+                            .run(r.conn);
+                    })
+                    .then(function (newUser) {
+                        done(null, newUser);
+                    });
+            });
+    })
+    .catch(function (err) {
+        console.error('Error Getting User', err);
+    });
+}
+
 function loginCallbackHandler (objectMapper, type) {
     return function (accessToken, refreshToken, profile, done) {
-        if (accessToken !== null) {
-            console.log(profile);
-            r
-                .table('users')
-                .getAll(profile.id, { index: 'login' })
-                .filter({ type: type })
-                .run(r.conn)
-                .then(function (cursor) {
-                    return cursor.toArray()
-                        .then(function (users) {
-                            if (users.length > 0) {
-                                return done(null, users[0]);
-                            }
-                            return r.table('users')
-                                .insert(objectMapper(profile))
-                                .run(r.conn)
-                                .then(function (response) {
-                                    return r.table('users')
-                                        .get(response.generated_keys[0])
-                                        .run(r.conn);
-                                })
-                                .then(function (newUser) {
-                                    done(null, newUser);
-                                });
-                        });
-                })
-                .catch(function (err) {
-                    console.error('Error Getting User', err);
-                });
-        }
+        if (accessToken !== null)
+            return getOrCreateUser(profile, objectMapper, type, done);
     };
 };
 //var callbackURL = 'http://' + config.get('url') + ':' + config.get('ports').http + '/auth/login/callback';
