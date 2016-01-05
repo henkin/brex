@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 
-class Title extends React.Component {
+export class Title extends React.Component {
     constructor(thing) {
         super(thing);
         console.log(thing);
@@ -14,7 +14,7 @@ class Title extends React.Component {
     }
 }
 
-class Main extends React.Component {
+export class Main extends React.Component {
     render() {
         return (
             <div>
@@ -24,5 +24,3 @@ class Main extends React.Component {
         )
     }
 }
-
-export default Main;

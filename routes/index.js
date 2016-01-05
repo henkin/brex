@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+  router = express.Router(),
+  React = require('react'),
+  ReactDOMServer = require('react-dom/server'),
+  Main = require('../build/src/app/main.js').Main,
+  mainElement = React.createFactory(Main);
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', user: req.user });
+  var output = ReactDOMServer.renderToString(mainElement());
+
+  res.render('index', {
+    title: 'Express',
+    user: req.user,
+    reactOutput: output
+  });
 });
 
 module.exports = router;
