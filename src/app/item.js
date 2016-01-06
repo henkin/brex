@@ -23,17 +23,10 @@ export class Item extends React.Component {
     }
 
     render() {
-        return (<div>
-            <form className="commentForm" onSubmit={this.handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="New Item"
-                    value=''
-                    onChange={this.handleTextChange}
-                />
-
-                <input type="submit" value="Post" />
-            </form>
+        return (<div className="list-group-item">
+            <ul>
+                <li></li>
+            </ul>
         </div>)
     };
 }

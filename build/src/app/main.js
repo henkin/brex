@@ -11,7 +11,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _itemlist = require('./itemlist');
+var _itemList = require('./itemList');
+
+var _itemEdit = require('./itemEdit');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,13 +37,30 @@ var Main = exports.Main = (function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'list-group' },
                 _react2.default.createElement(
                     'p',
                     null,
-                    'Items (there are X)'
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Items'
+                    )
                 ),
-                _react2.default.createElement(_itemlist.ItemList, null)
+                _react2.default.createElement(
+                    'ul',
+                    { 'class': 'list-group' },
+                    _react2.default.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        _react2.default.createElement(_itemList.ItemList, null)
+                    ),
+                    _react2.default.createElement(
+                        'li',
+                        { className: 'list-group-item' },
+                        _react2.default.createElement(_itemEdit.ItemEdit, null)
+                    )
+                )
             );
         }
     }]);

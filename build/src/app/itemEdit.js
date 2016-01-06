@@ -12,22 +12,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import React, { Component, PropTypes } from 'react'
 var React = require('react');
 
-var Item = exports.Item = (function (_React$Component) {
-    _inherits(Item, _React$Component);
+var ItemEdit = exports.ItemEdit = (function (_React$Component) {
+    _inherits(ItemEdit, _React$Component);
 
-    function Item(thing) {
-        _classCallCheck(this, Item);
+    function ItemEdit(thing) {
+        _classCallCheck(this, ItemEdit);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Item).call(this, thing));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemEdit).call(this, thing));
 
         console.log(thing);
         return _this;
     }
 
-    _createClass(Item, [{
+    _createClass(ItemEdit, [{
         key: 'handleTextChange',
         value: function handleTextChange() {
             this.setState({ text: e.target.value });
@@ -36,11 +35,11 @@ var Item = exports.Item = (function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
             e.preventDefault();
-            var author = this.state.author.trim();
-            var text = this.state.text.trim();
-            if (!text) {
-                return;
-            }
+            //var author = this.state.author.trim();
+            //var text = this.state.text.trim();
+            //if (!text) {
+            //    return;
+            //}
             // TODO: send request to the server
             this.setState({ text: '' });
         }
@@ -48,17 +47,36 @@ var Item = exports.Item = (function (_React$Component) {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'div',
-                { className: 'list-group-item' },
+                'form',
+                { className: 'form-inline', onSubmit: this.handleSubmit },
                 React.createElement(
-                    'ul',
-                    null,
-                    React.createElement('li', null)
+                    'div',
+                    { className: 'form-group' },
+                    React.createElement(
+                        'label',
+                        { className: 'sr-only', 'for': 'exampleInputAmount' },
+                        'New Item'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'input-group' },
+                        React.createElement('input', { type: 'text',
+                            className: 'form-control',
+                            id: 'exampleInputAmount',
+                            placeholder: 'Something Great',
+                            onChange: this.handleTextChange
+                        }),
+                        React.createElement(
+                            'div',
+                            { className: 'input-group-addon' },
+                            'Post'
+                        )
+                    )
                 )
             );
         }
     }]);
 
-    return Item;
+    return ItemEdit;
 })(React.Component);
-//# sourceMappingURL=item.js.map
+//# sourceMappingURL=itemEdit.js.map
