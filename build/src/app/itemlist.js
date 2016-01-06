@@ -5,15 +5,6 @@ var _createClass = (function () { function defineProperties(target, props) { for
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Main = undefined;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _itemlist = require('./itemlist');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21,31 +12,40 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Main = exports.Main = (function (_React$Component) {
-    _inherits(Main, _React$Component);
+var React = require('react');
+var Item = require('./item').Item;
 
-    function Main() {
-        _classCallCheck(this, Main);
+var ItemList = exports.ItemList = (function (_React$Component) {
+    _inherits(ItemList, _React$Component);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+    function ItemList(thing) {
+        _classCallCheck(this, ItemList);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemList).call(this, thing));
+
+        console.log(thing);
+        return _this;
     }
 
-    _createClass(Main, [{
+    _createClass(ItemList, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
+            return React.createElement(
                 'div',
-                null,
-                _react2.default.createElement(
-                    'p',
+                { className: 'itemList' },
+                React.createElement(
+                    'ul',
                     null,
-                    'Items (there are X)'
-                ),
-                _react2.default.createElement(_itemlist.ItemList, null)
+                    React.createElement(
+                        'li',
+                        null,
+                        React.createElement(Item, null)
+                    )
+                )
             );
         }
     }]);
 
-    return Main;
-})(_react2.default.Component);
-//# sourceMappingURL=main.js.map
+    return ItemList;
+})(React.Component);
+//# sourceMappingURL=itemlist.js.map
