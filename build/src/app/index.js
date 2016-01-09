@@ -8,9 +8,7 @@ var _reactDom = require('react-dom');
 
 var _main = require('./main');
 
-var _main2 = _interopRequireDefault(_main);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react2.default.createElement(_main2.default, null), document.getElementById('example'));
+(0, _reactDom.render)(_react2.default.createElement(_main.Main, null), document.getElementById('example'));
 //# sourceMappingURL=index.js.map

@@ -18,46 +18,26 @@ var Item = require('./item').Item;
 var ItemList = exports.ItemList = (function (_React$Component) {
     _inherits(ItemList, _React$Component);
 
-    function ItemList(thing) {
+    function ItemList(items) {
         _classCallCheck(this, ItemList);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemList).call(this, thing));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemList).call(this, items));
 
-        console.log(thing);
+        _this.items = items.items;
+        console.log('ItemList', _this.items);
         return _this;
     }
 
     _createClass(ItemList, [{
         key: 'render',
         value: function render() {
+            var itemNodes = this.items.map(function (item) {
+                return React.createElement(Item, { key: item.id, name: item.name });
+            });
             return React.createElement(
                 'div',
                 { 'class': 'list-group' },
-                React.createElement(
-                    'a',
-                    { href: '#', className: 'list-group-item disabled' },
-                    'Cras justo odio'
-                ),
-                React.createElement(
-                    'a',
-                    { href: '#', className: 'list-group-item' },
-                    'Morbi leo risus'
-                ),
-                React.createElement(
-                    'a',
-                    { href: '#', className: 'list-group-item' },
-                    'Porta ac consectetur ac'
-                ),
-                React.createElement(
-                    'a',
-                    { href: '#', className: 'list-group-item' },
-                    'Vestibulum at eros'
-                ),
-                React.createElement(
-                    'a',
-                    { href: '#', className: 'list-group-item' },
-                    'Dapibus ac facilisis in'
-                )
+                itemNodes
             );
         }
     }]);

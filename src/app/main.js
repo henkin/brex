@@ -4,14 +4,22 @@ import { ItemList } from './itemList';
 import { ItemEdit } from './itemEdit';
 
 export class Main extends React.Component {
+    constructor(thing) {
+        super(thing);
+        this.items = [
+            {id: 1234, name: 'Item 1 is good'},
+            {id: 4234, name: 'Item 2 is better'}
+        ];
+        console.log('Main', this.items);
+    }
+
     render() {
         return (
             <div className="list-group">
                 <p><h1>Items</h1></p>
-                <ul class="list-group">
-                    <li className="list-group-item"><ItemList /></li>
-                    <li className="list-group-item"><ItemEdit /></li>
-                </ul>
+                <ItemList items={this.items} />
+                <br />
+                <ItemEdit />
             </div>
         )
     }

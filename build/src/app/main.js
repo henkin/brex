@@ -26,10 +26,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Main = exports.Main = (function (_React$Component) {
     _inherits(Main, _React$Component);
 
-    function Main() {
+    function Main(thing) {
         _classCallCheck(this, Main);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, thing));
+
+        _this.items = [{ id: 1234, name: 'Item 1 is good' }, { id: 4234, name: 'Item 2 is better' }];
+        console.log('Main', _this.items);
+        return _this;
     }
 
     _createClass(Main, [{
@@ -47,20 +51,9 @@ var Main = exports.Main = (function (_React$Component) {
                         'Items'
                     )
                 ),
-                _react2.default.createElement(
-                    'ul',
-                    { 'class': 'list-group' },
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'list-group-item' },
-                        _react2.default.createElement(_itemList.ItemList, null)
-                    ),
-                    _react2.default.createElement(
-                        'li',
-                        { className: 'list-group-item' },
-                        _react2.default.createElement(_itemEdit.ItemEdit, null)
-                    )
-                )
+                _react2.default.createElement(_itemList.ItemList, { items: this.items }),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(_itemEdit.ItemEdit, null)
             );
         }
     }]);

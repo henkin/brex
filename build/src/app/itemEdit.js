@@ -28,18 +28,16 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
 
     _createClass(ItemEdit, [{
         key: 'handleTextChange',
-        value: function handleTextChange() {
-            this.setState({ text: e.target.value });
+        value: function handleTextChange(e) {
+            this.setState({ name: e.target.value });
+            console.log('text', this.state);
         }
     }, {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
             e.preventDefault();
-            //var author = this.state.author.trim();
-            //var text = this.state.text.trim();
-            //if (!text) {
-            //    return;
-            //}
+            var author = this.state.name.trim();
+            console.log(author);
             // TODO: send request to the server
             this.setState({ text: '' });
         }

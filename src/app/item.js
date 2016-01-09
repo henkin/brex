@@ -2,31 +2,14 @@
 var React = require('react');
 
 export class Item extends React.Component {
-    constructor(thing) {
-        super(thing);
-        console.log(thing);
-    }
-
-    handleTextChange() {
-        this.setState({text: e.target.value});
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        var author = this.state.author.trim();
-        var text = this.state.text.trim();
-        if (!text) {
-            return;
-        }
-        // TODO: send request to the server
-        this.setState({text: ''});
+    constructor(data) {
+        super(data);
+        this.name = data.name;
+        console.log('Item', this.name);
     }
 
     render() {
-        return (<div className="list-group-item">
-            <ul>
-                <li></li>
-            </ul>
-        </div>)
+        return (<a key="#" className="list-group-item">{this.name}</a>
+        )
     };
 }

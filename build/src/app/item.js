@@ -18,43 +18,23 @@ var React = require('react');
 var Item = exports.Item = (function (_React$Component) {
     _inherits(Item, _React$Component);
 
-    function Item(thing) {
+    function Item(data) {
         _classCallCheck(this, Item);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Item).call(this, thing));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Item).call(this, data));
 
-        console.log(thing);
+        _this.name = data.name;
+        console.log('Item', _this.name);
         return _this;
     }
 
     _createClass(Item, [{
-        key: 'handleTextChange',
-        value: function handleTextChange() {
-            this.setState({ text: e.target.value });
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(e) {
-            e.preventDefault();
-            var author = this.state.author.trim();
-            var text = this.state.text.trim();
-            if (!text) {
-                return;
-            }
-            // TODO: send request to the server
-            this.setState({ text: '' });
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'div',
-                { className: 'list-group-item' },
-                React.createElement(
-                    'ul',
-                    null,
-                    React.createElement('li', null)
-                )
+                'a',
+                { key: '#', className: 'list-group-item' },
+                this.name
             );
         }
     }]);
