@@ -17,12 +17,17 @@ var React = require('react');
 var ItemEdit = exports.ItemEdit = (function (_React$Component) {
     _inherits(ItemEdit, _React$Component);
 
-    function ItemEdit(thing) {
+    function ItemEdit(props) {
         _classCallCheck(this, ItemEdit);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemEdit).call(this, thing));
+        //console.log(thing);
 
-        console.log(thing);
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemEdit).call(this, props));
+
+        _this.state = { name: '' };
+        _this.onItemAdded = props.onItemAdded;
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleTextChange = _this.handleTextChange.bind(_this);
         return _this;
     }
 
@@ -30,16 +35,26 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
         key: 'handleTextChange',
         value: function handleTextChange(e) {
             this.setState({ name: e.target.value });
-            console.log('text', this.state);
+            console.log('t', e.target.value);
         }
     }, {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
             e.preventDefault();
-            var author = this.state.name.trim();
-            console.log(author);
+            var item = { id: this.guid(), name: this.state.name.trim() };
+            console.log(item);
+            this.onItemAdded(item);
             // TODO: send request to the server
-            this.setState({ text: '' });
+            this.setState({ name: '' });
+        }
+    }, {
+        key: 'guid',
+        value: function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         }
     }, {
         key: 'render',
@@ -52,7 +67,7 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
                     { className: 'form-group' },
                     React.createElement(
                         'label',
-                        { className: 'sr-only', 'for': 'exampleInputAmount' },
+                        { className: 'sr-only', htmlFor: 'exampleInputAmount' },
                         'New Item'
                     ),
                     React.createElement(
@@ -62,12 +77,17 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
                             className: 'form-control',
                             id: 'exampleInputAmount',
                             placeholder: 'Something Great',
+                            value: this.state.name,
                             onChange: this.handleTextChange
                         }),
                         React.createElement(
-                            'div',
-                            { className: 'input-group-addon' },
-                            'Post'
+                            'span',
+                            { className: 'input-group-btn' },
+                            React.createElement(
+                                'button',
+                                { type: 'submit', className: 'btn btn-default' },
+                                'Post'
+                            )
                         )
                     )
                 )

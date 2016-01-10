@@ -19159,12 +19159,17 @@ var React = require('react');
 var ItemEdit = exports.ItemEdit = (function (_React$Component) {
     _inherits(ItemEdit, _React$Component);
 
-    function ItemEdit(thing) {
+    function ItemEdit(props) {
         _classCallCheck(this, ItemEdit);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemEdit).call(this, thing));
+        //console.log(thing);
 
-        console.log(thing);
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ItemEdit).call(this, props));
+
+        _this.state = { name: '' };
+        _this.onItemAdded = props.onItemAdded;
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleTextChange = _this.handleTextChange.bind(_this);
         return _this;
     }
 
@@ -19172,16 +19177,26 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
         key: 'handleTextChange',
         value: function handleTextChange(e) {
             this.setState({ name: e.target.value });
-            console.log('text', this.state);
+            console.log('t', e.target.value);
         }
     }, {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
             e.preventDefault();
-            var author = this.state.name.trim();
-            console.log(author);
+            var item = { id: this.guid(), name: this.state.name.trim() };
+            console.log(item);
+            this.onItemAdded(item);
             // TODO: send request to the server
-            this.setState({ text: '' });
+            this.setState({ name: '' });
+        }
+    }, {
+        key: 'guid',
+        value: function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         }
     }, {
         key: 'render',
@@ -19194,7 +19209,7 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
                     { className: 'form-group' },
                     React.createElement(
                         'label',
-                        { className: 'sr-only', 'for': 'exampleInputAmount' },
+                        { className: 'sr-only', htmlFor: 'exampleInputAmount' },
                         'New Item'
                     ),
                     React.createElement(
@@ -19204,12 +19219,17 @@ var ItemEdit = exports.ItemEdit = (function (_React$Component) {
                             className: 'form-control',
                             id: 'exampleInputAmount',
                             placeholder: 'Something Great',
+                            value: this.state.name,
                             onChange: this.handleTextChange
                         }),
                         React.createElement(
-                            'div',
-                            { className: 'input-group-addon' },
-                            'Post'
+                            'span',
+                            { className: 'input-group-btn' },
+                            React.createElement(
+                                'button',
+                                { type: 'submit', className: 'btn btn-default' },
+                                'Post'
+                            )
                         )
                     )
                 )
@@ -19257,9 +19277,10 @@ var ItemList = exports.ItemList = (function (_React$Component) {
             var itemNodes = this.items.map(function (item) {
                 return React.createElement(Item, { key: item.id, name: item.name });
             });
+
             return React.createElement(
                 'div',
-                { 'class': 'list-group' },
+                { className: 'list-group' },
                 itemNodes
             );
         }
@@ -19302,29 +19323,42 @@ var Main = exports.Main = (function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, thing));
 
-        _this.items = [{ id: 1234, name: 'Item 1 is good' }, { id: 4234, name: 'Item 2 is better' }];
         console.log('Main', _this.items);
+        _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
 
     _createClass(Main, [{
+        key: 'onComponentDidMount',
+        value: function onComponentDidMount() {
+            this.setState({ items: this.items });
+        }
+    }, {
+        key: 'onItemAdded',
+        value: function onItemAdded(item) {
+            this.items.push(item);
+            this.setState({ items: this.items });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var itemList = this.state && this.state.items.length > 0 ? _react2.default.createElement(_itemList.ItemList, { items: this.items }) : _react2.default.createElement(
+                'h2',
+                null,
+                'No Items!'
+            );
+
             return _react2.default.createElement(
                 'div',
                 { className: 'list-group' },
                 _react2.default.createElement(
-                    'p',
+                    'h1',
                     null,
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Items'
-                    )
+                    'Items'
                 ),
-                _react2.default.createElement(_itemList.ItemList, { items: this.items }),
+                itemList,
                 _react2.default.createElement('br', null),
-                _react2.default.createElement(_itemEdit.ItemEdit, null)
+                _react2.default.createElement(_itemEdit.ItemEdit, { onItemAdded: this.onItemAdded })
             );
         }
     }]);

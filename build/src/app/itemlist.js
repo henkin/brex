@@ -34,9 +34,10 @@ var ItemList = exports.ItemList = (function (_React$Component) {
             var itemNodes = this.items.map(function (item) {
                 return React.createElement(Item, { key: item.id, name: item.name });
             });
+
             return React.createElement(
                 'div',
-                { 'class': 'list-group' },
+                { className: 'list-group' },
                 itemNodes
             );
         }

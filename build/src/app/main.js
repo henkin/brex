@@ -31,29 +31,42 @@ var Main = exports.Main = (function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, thing));
 
-        _this.items = [{ id: 1234, name: 'Item 1 is good' }, { id: 4234, name: 'Item 2 is better' }];
         console.log('Main', _this.items);
+        _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
 
     _createClass(Main, [{
+        key: 'onComponentDidMount',
+        value: function onComponentDidMount() {
+            this.setState({ items: this.items });
+        }
+    }, {
+        key: 'onItemAdded',
+        value: function onItemAdded(item) {
+            this.items.push(item);
+            this.setState({ items: this.items });
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var itemList = this.state && this.state.items.length > 0 ? _react2.default.createElement(_itemList.ItemList, { items: this.items }) : _react2.default.createElement(
+                'h2',
+                null,
+                'No Items!'
+            );
+
             return _react2.default.createElement(
                 'div',
                 { className: 'list-group' },
                 _react2.default.createElement(
-                    'p',
+                    'h1',
                     null,
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Items'
-                    )
+                    'Items'
                 ),
-                _react2.default.createElement(_itemList.ItemList, { items: this.items }),
+                itemList,
                 _react2.default.createElement('br', null),
-                _react2.default.createElement(_itemEdit.ItemEdit, null)
+                _react2.default.createElement(_itemEdit.ItemEdit, { onItemAdded: this.onItemAdded })
             );
         }
     }]);

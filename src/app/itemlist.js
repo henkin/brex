@@ -12,7 +12,8 @@ export class ItemList extends React.Component {
         let itemNodes = this.items.map((item) => {
             return (<Item key={item.id} name={item.name}/>)
         });
-        return (<div class="list-group">
+        
+        return (<div className="list-group">
                     {itemNodes}
                 </div>);
     }

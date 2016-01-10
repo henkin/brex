@@ -6,20 +6,31 @@ import { ItemEdit } from './itemEdit';
 export class Main extends React.Component {
     constructor(thing) {
         super(thing);
-        this.items = [
-            {id: 1234, name: 'Item 1 is good'},
-            {id: 4234, name: 'Item 2 is better'}
-        ];
         console.log('Main', this.items);
+        this.onItemAdded = this.onItemAdded.bind(this);
+    }
+
+    onComponentDidMount() {
+        this.setState({items: this.items});
+    }
+
+    onItemAdded(item)
+    {
+        this.items.push(item);
+        this.setState({items: this.items});
     }
 
     render() {
+        let itemList = this.state && this.state.items.length > 0 ?
+            (<ItemList items={this.items} />) :
+            (<h2>No Items!</h2>);
+
         return (
             <div className="list-group">
-                <p><h1>Items</h1></p>
-                <ItemList items={this.items} />
+                <h1>Items</h1>
+                {itemList}
                 <br />
-                <ItemEdit />
+                <ItemEdit onItemAdded={this.onItemAdded}/>
             </div>
         )
     }
