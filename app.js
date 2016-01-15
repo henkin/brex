@@ -10,6 +10,7 @@ let passportConfig = require('./auth')(passport);
 let util = require('util');
 let session = require('express-session');
 let routes = require('./routes/index');
+let items = require('./routes/api/items');
 let users = require('./routes/users');
 let auth = require('./routes/auth');
 var app = express();
@@ -39,6 +40,7 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use('/build',  express.static(__dirname + '/build'));
 
 app.use('/', routes);
+app.use('/api/items', items);
 app.use('/users', users);
 app.use('/auth', auth);
 

@@ -10,5 +10,6 @@ var _main = require('./main');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react2.default.createElement(_main.Main, null), document.getElementById('example'));
+// we need the user passed in a parameter
+(0, _reactDom.render)(_react2.default.createElement(_main.Main, { url: '/api/items' }), document.getElementById('example'));
 //# sourceMappingURL=index.js.map

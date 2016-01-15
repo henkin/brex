@@ -26,12 +26,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Main = exports.Main = (function (_React$Component) {
     _inherits(Main, _React$Component);
 
-    function Main(thing) {
+    function Main(props) {
         _classCallCheck(this, Main);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, thing));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 
-        console.log('Main', _this.items);
+        _this.items = [];
+
+        console.log('Main', _this.props, _this.url);
         _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
@@ -45,6 +47,20 @@ var Main = exports.Main = (function (_React$Component) {
         key: 'onItemAdded',
         value: function onItemAdded(item) {
             this.items.push(item);
+
+            $.ajax({
+                url: this.props.url,
+                dataType: 'json',
+                type: 'POST',
+                data: item,
+                success: (function (data) {
+                    //this.setState({name: data});
+                }).bind(this),
+                error: (function (xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }).bind(this)
+            });
+
             this.setState({ items: this.items });
         }
     }, {

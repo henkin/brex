@@ -32,9 +32,15 @@ var Item = exports.Item = (function (_React$Component) {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'a',
-                { key: '#', className: 'list-group-item' },
-                this.name
+                'span',
+                null,
+                React.createElement(
+                    'a',
+                    { key: '#', className: 'list-group-item' },
+                    React.createElement('input', { type: 'checkbox' }),
+                    ' ',
+                    this.name
+                )
             );
         }
     }]);

@@ -19092,7 +19092,8 @@ var _main = require('./main');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_react2.default.createElement(_main.Main, null), document.getElementById('example'));
+// we need the user passed in a parameter
+(0, _reactDom.render)(_react2.default.createElement(_main.Main, { url: '/api/items' }), document.getElementById('example'));
 
 },{"./main":163,"react":158,"react-dom":29}],160:[function(require,module,exports){
 'use strict';
@@ -19129,9 +19130,15 @@ var Item = exports.Item = (function (_React$Component) {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'a',
-                { key: '#', className: 'list-group-item' },
-                this.name
+                'span',
+                null,
+                React.createElement(
+                    'a',
+                    { key: '#', className: 'list-group-item' },
+                    React.createElement('input', { type: 'checkbox' }),
+                    ' ',
+                    this.name
+                )
             );
         }
     }]);
@@ -19318,12 +19325,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Main = exports.Main = (function (_React$Component) {
     _inherits(Main, _React$Component);
 
-    function Main(thing) {
+    function Main(props) {
         _classCallCheck(this, Main);
 
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, thing));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
 
-        console.log('Main', _this.items);
+        _this.items = [];
+
+        console.log('Main', _this.props, _this.url);
         _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
@@ -19337,6 +19346,20 @@ var Main = exports.Main = (function (_React$Component) {
         key: 'onItemAdded',
         value: function onItemAdded(item) {
             this.items.push(item);
+
+            $.ajax({
+                url: this.props.url,
+                dataType: 'json',
+                type: 'POST',
+                data: item,
+                success: (function (data) {
+                    //this.setState({name: data});
+                }).bind(this),
+                error: (function (xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }).bind(this)
+            });
+
             this.setState({ items: this.items });
         }
     }, {

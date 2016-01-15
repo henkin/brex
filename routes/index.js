@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Express',
     user: req.user,
+    serializedUser: JSON.stringify(req.user || {}),
     reactOutput: output
   });
 });

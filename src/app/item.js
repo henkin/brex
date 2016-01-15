@@ -9,7 +9,8 @@ export class Item extends React.Component {
     }
 
     render() {
-        return (<a key="#" className="list-group-item">{this.name}</a>
-        )
+        return (<span>
+            <a key="#" className="list-group-item"><input type="checkbox"/> {this.name}</a>
+        </span>)
     };
 }

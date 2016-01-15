@@ -4,9 +4,11 @@ import { ItemList } from './itemList';
 import { ItemEdit } from './itemEdit';
 
 export class Main extends React.Component {
-    constructor(thing) {
-        super(thing);
-        console.log('Main', this.items);
+    constructor(props) {
+        super(props);
+        this.items = [];
+
+        console.log('Main', this.props, this.url);
         this.onItemAdded = this.onItemAdded.bind(this);
     }
 
@@ -17,6 +19,20 @@ export class Main extends React.Component {
     onItemAdded(item)
     {
         this.items.push(item);
+
+        $.ajax({
+            url: this.props.url,
+            dataType: 'json',
+            type: 'POST',
+            data: item,
+            success: function(data) {
+                //this.setState({name: data});
+            }.bind(this),
+            error: function(xhr, status, err) {
+            console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+
         this.setState({items: this.items});
     }
 
