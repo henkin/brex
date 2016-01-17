@@ -19093,7 +19093,7 @@ var _main = require('./main');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // we need the user passed in a parameter
-(0, _reactDom.render)(_react2.default.createElement(_main.Main, { url: '/api/items' }), document.getElementById('example'));
+(0, _reactDom.render)(_react2.default.createElement(_main.Main, { user: serializedUser }), document.getElementById('example'));
 
 },{"./main":163,"react":158,"react-dom":29}],160:[function(require,module,exports){
 'use strict';
@@ -19332,7 +19332,7 @@ var Main = exports.Main = (function (_React$Component) {
 
         _this.items = [];
 
-        console.log('Main', _this.props, _this.url);
+        console.info('Main loaded', props);
         _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
@@ -19348,7 +19348,7 @@ var Main = exports.Main = (function (_React$Component) {
             this.items.push(item);
 
             $.ajax({
-                url: this.props.url,
+                url: '/api/items',
                 dataType: 'json',
                 type: 'POST',
                 data: item,

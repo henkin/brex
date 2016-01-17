@@ -8,7 +8,7 @@ export class Main extends React.Component {
         super(props);
         this.items = [];
 
-        console.log('Main', this.props, this.url);
+        console.info('Main loaded', props);
         this.onItemAdded = this.onItemAdded.bind(this);
     }
 
@@ -21,7 +21,7 @@ export class Main extends React.Component {
         this.items.push(item);
 
         $.ajax({
-            url: this.props.url,
+            url: '/api/items',
             dataType: 'json',
             type: 'POST',
             data: item,

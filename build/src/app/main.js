@@ -33,7 +33,7 @@ var Main = exports.Main = (function (_React$Component) {
 
         _this.items = [];
 
-        console.log('Main', _this.props, _this.url);
+        console.info('Main loaded', props);
         _this.onItemAdded = _this.onItemAdded.bind(_this);
         return _this;
     }
@@ -49,7 +49,7 @@ var Main = exports.Main = (function (_React$Component) {
             this.items.push(item);
 
             $.ajax({
-                url: this.props.url,
+                url: '/api/items',
                 dataType: 'json',
                 type: 'POST',
                 data: item,
